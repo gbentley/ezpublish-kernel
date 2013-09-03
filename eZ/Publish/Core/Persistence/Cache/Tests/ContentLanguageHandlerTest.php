@@ -27,7 +27,7 @@ class ContentLanguageHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'language', 2 )
+            ->with( 'spi', 'language', 2 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Language\\Handler' );
@@ -70,7 +70,7 @@ class ContentLanguageHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'clear' )
-            ->with( 'language', 2 )
+            ->with( 'spi', 'language', 2 )
             ->will( $this->returnValue( true ) );
 
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Language\\Handler' );
@@ -101,7 +101,7 @@ class ContentLanguageHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'language', 2 )
+            ->with( 'spi', 'language', 2 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -151,7 +151,7 @@ class ContentLanguageHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'language', 2 )
+            ->with( 'spi', 'language', 2 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -249,7 +249,7 @@ class ContentLanguageHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'language', 2 )
+            ->with( 'spi', 'language', 2 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $innerHandler = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Language\\Handler' );

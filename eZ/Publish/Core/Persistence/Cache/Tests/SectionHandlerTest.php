@@ -26,13 +26,13 @@ class SectionHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'clear' )
-            ->with( 'content', 44 )
+            ->with( 'spi', 'content', 44 )
             ->will( $this->returnValue( null ) );
 
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'clear' )
-            ->with( 'content', 'info', 44 )
+            ->with( 'spi', 'content', 'info', 44 )
             ->will( $this->returnValue( null ) );
 
         $innerHandler = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Section\\Handler' );
@@ -106,7 +106,7 @@ class SectionHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'section', 33 )
+            ->with( 'spi', 'section', 33 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -146,7 +146,7 @@ class SectionHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'clear' )
-            ->with( 'section', 33 )
+            ->with( 'spi', 'section', 33 )
             ->will( $this->returnValue( true ) );
 
         $handler = $this->persistenceHandler->sectionHandler();
@@ -163,7 +163,7 @@ class SectionHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'section', 33 )
+            ->with( 'spi', 'section', 33 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -213,7 +213,7 @@ class SectionHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'section', 33 )
+            ->with( 'spi', 'section', 33 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -330,7 +330,7 @@ class SectionHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'section', 33 )
+            ->with( 'spi', 'section', 33 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock

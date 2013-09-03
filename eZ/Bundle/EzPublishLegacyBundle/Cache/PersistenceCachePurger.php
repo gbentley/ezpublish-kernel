@@ -70,7 +70,7 @@ class PersistenceCachePurger implements CacheClearerInterface
         if ( $this->isEnabled === false )
             return;
 
-        $this->cache->clear();
+        $this->cache->clear( 'spi' );
         $this->allCleared = true;
     }
 
@@ -136,7 +136,7 @@ class PersistenceCachePurger implements CacheClearerInterface
 
         if ( $locationIds === null )
         {
-            $this->cache->clear( 'content' );
+            $this->cache->clear( 'spi', 'content' );
             goto relatedCache;
         }
         else if ( !is_array( $locationIds ) )
@@ -152,8 +152,8 @@ class PersistenceCachePurger implements CacheClearerInterface
             try
             {
                 $location = $this->locationHandler->load( $id );
-                $this->cache->clear( 'content', $location->contentId );
-                $this->cache->clear( 'content', 'info', $location->contentId );
+                $this->cache->clear( 'spi', 'content', $location->contentId );
+                $this->cache->clear( 'spi', 'content', 'info', $location->contentId );
             }
             catch ( NotFoundException $e )
             {
@@ -165,8 +165,8 @@ class PersistenceCachePurger implements CacheClearerInterface
 
         // clear content related cache as well
         relatedCache:
-        $this->cache->clear( 'urlAlias' );
-        $this->cache->clear( 'location' );
+        $this->cache->clear( 'spi', 'urlAlias' );
+        $this->cache->clear( 'spi', 'location' );
 
         return $locationIds;
     }
@@ -184,11 +184,11 @@ class PersistenceCachePurger implements CacheClearerInterface
 
         if ( $id === null )
         {
-            $this->cache->clear( 'contentType' );
+            $this->cache->clear( 'spi', 'contentType' );
         }
         else if ( is_scalar( $id ) )
         {
-            $this->cache->clear( 'contentType', $id );
+            $this->cache->clear( 'spi', 'contentType', $id );
         }
         else
         {
@@ -211,11 +211,11 @@ class PersistenceCachePurger implements CacheClearerInterface
 
         if ( $id === null )
         {
-            $this->cache->clear( 'contentTypeGroup' );
+            $this->cache->clear( 'spi', 'contentTypeGroup' );
         }
         else if ( is_scalar( $id ) )
         {
-            $this->cache->clear( 'contentTypeGroup', $id );
+            $this->cache->clear( 'spi', 'contentTypeGroup', $id );
         }
         else
         {
@@ -223,7 +223,7 @@ class PersistenceCachePurger implements CacheClearerInterface
         }
 
         // clear content type in case of changes as it contains the relation to groups
-        $this->cache->clear( 'contentType' );
+        $this->cache->clear( 'spi', 'contentType' );
     }
 
     /**
@@ -239,11 +239,11 @@ class PersistenceCachePurger implements CacheClearerInterface
 
         if ( $id === null )
         {
-            $this->cache->clear( 'section' );
+            $this->cache->clear( 'spi', 'section' );
         }
         else if ( is_scalar( $id ) )
         {
-            $this->cache->clear( 'section', $id );
+            $this->cache->clear( 'spi', 'section', $id );
         }
         else
         {
@@ -263,7 +263,7 @@ class PersistenceCachePurger implements CacheClearerInterface
 
         $ids = (array)$ids;
         foreach ( $ids as $id )
-            $this->cache->clear( 'language', $id );
+            $this->cache->clear( 'spi', 'language', $id );
     }
 
     /**
@@ -279,11 +279,11 @@ class PersistenceCachePurger implements CacheClearerInterface
 
         if ( $id === null )
         {
-            $this->cache->clear( 'user' );
+            $this->cache->clear( 'spi', 'user' );
         }
         else if ( is_scalar( $id ) )
         {
-            $this->cache->clear( 'user', $id );
+            $this->cache->clear( 'spi', 'user', $id );
         }
         else
         {

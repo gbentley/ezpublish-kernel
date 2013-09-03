@@ -109,7 +109,7 @@ class UserHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'clear' )
-            ->with( 'content', 42 )
+            ->with( 'spi', 'content', 42 )
             ->will( $this->returnValue( true ) );
 
         $handler = $this->persistenceHandler->userHandler();
@@ -140,7 +140,7 @@ class UserHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'clear' )
-            ->with( 'content', 42 )
+            ->with( 'spi', 'content', 42 )
             ->will( $this->returnValue( true ) );
 
         $handler = $this->persistenceHandler->userHandler();
@@ -171,19 +171,19 @@ class UserHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'clear' )
-            ->with( 'content', 14 )
+            ->with( 'spi', 'content', 14 )
             ->will( $this->returnValue( true ) );
 
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'clear' )
-            ->with( 'user', 'role', 'assignments', 'byGroup', 14 )
+            ->with( 'spi', 'user', 'role', 'assignments', 'byGroup', 14 )
             ->will( $this->returnValue( true ) );
 
         $this->cacheMock
             ->expects( $this->at( 2 ) )
             ->method( 'clear' )
-            ->with( 'user', 'role', 'assignments', 'byGroup', 'inherited', 14 )
+            ->with( 'spi', 'user', 'role', 'assignments', 'byGroup', 'inherited', 14 )
             ->will( $this->returnValue( true ) );
 
         $handler = $this->persistenceHandler->userHandler();
@@ -201,7 +201,7 @@ class UserHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'user', 'role', 33 )
+            ->with( 'spi', 'user', 'role', 33 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -248,7 +248,7 @@ class UserHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'user', 'role', 33 )
+            ->with( 'spi', 'user', 'role', 33 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -284,7 +284,7 @@ class UserHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'user', 'role', 'assignments', 'byGroup', 42 )
+            ->with( 'spi', 'user', 'role', 'assignments', 'byGroup', 42 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -339,7 +339,7 @@ class UserHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'user', 'role', 'assignments', 'byGroup', 42 )
+            ->with( 'spi', 'user', 'role', 'assignments', 'byGroup', 42 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -381,7 +381,7 @@ class UserHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'user', 'role', 'assignments', 'byGroup', 'inherited/42' )
+            ->with( 'spi', 'user', 'role', 'assignments', 'byGroup', 'inherited/42' )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -432,7 +432,7 @@ class UserHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'user', 'role', 'assignments', 'byGroup', 'inherited/42' )
+            ->with( 'spi', 'user', 'role', 'assignments', 'byGroup', 'inherited/42' )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -492,7 +492,7 @@ class UserHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'user', 'role', 33 )
+            ->with( 'spi', 'user', 'role', 33 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -532,7 +532,7 @@ class UserHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'clear' )
-            ->with( 'user', 'role', $roleUpdateStruct->id )
+            ->with( 'spi', 'user', 'role', $roleUpdateStruct->id )
             ->will( $this->returnValue( true ) );
 
         $this->cacheMock
@@ -567,13 +567,13 @@ class UserHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'clear' )
-            ->with( 'user', 'role', 33 )
+            ->with( 'spi', 'user', 'role', 33 )
             ->will( $this->returnValue( true ) );
 
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'clear' )
-            ->with( 'user', 'role', 'assignments' )
+            ->with( 'spi', 'user', 'role', 'assignments' )
             ->will( $this->returnValue( true ) );
 
         $handler = $this->persistenceHandler->userHandler();
@@ -604,7 +604,7 @@ class UserHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'clear' )
-            ->with( 'user', 'role', 33 )
+            ->with( 'spi', 'user', 'role', 33 )
             ->will( $this->returnValue( true ) );
 
         $handler = $this->persistenceHandler->userHandler();
@@ -635,7 +635,7 @@ class UserHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'clear' )
-            ->with( 'user', 'role', 33 )
+            ->with( 'spi', 'user', 'role', 33 )
             ->will( $this->returnValue( true ) );
 
         $handler = $this->persistenceHandler->userHandler();
@@ -666,7 +666,7 @@ class UserHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'clear' )
-            ->with( 'user', 'role', 33 )
+            ->with( 'spi', 'user', 'role', 33 )
             ->will( $this->returnValue( true ) );
 
         $handler = $this->persistenceHandler->userHandler();
@@ -697,19 +697,19 @@ class UserHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'clear' )
-            ->with( 'user', 'role', 22 )
+            ->with( 'spi', 'user', 'role', 22 )
             ->will( $this->returnValue( true ) );
 
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'clear' )
-            ->with( 'user', 'role', 'assignments', 'byGroup', 33 )
+            ->with( 'spi', 'user', 'role', 'assignments', 'byGroup', 33 )
             ->will( $this->returnValue( true ) );
 
         $this->cacheMock
             ->expects( $this->at( 2 ) )
             ->method( 'clear' )
-            ->with( 'user', 'role', 'assignments', 'byGroup', 'inherited' )
+            ->with( 'spi', 'user', 'role', 'assignments', 'byGroup', 'inherited' )
             ->will( $this->returnValue( true ) );
 
         $handler = $this->persistenceHandler->userHandler();
@@ -740,19 +740,19 @@ class UserHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'clear' )
-            ->with( 'user', 'role', 22 )
+            ->with( 'spi', 'user', 'role', 22 )
             ->will( $this->returnValue( true ) );
 
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'clear' )
-            ->with( 'user', 'role', 'assignments', 'byGroup', 33 )
+            ->with( 'spi', 'user', 'role', 'assignments', 'byGroup', 33 )
             ->will( $this->returnValue( true ) );
 
         $this->cacheMock
             ->expects( $this->at( 2 ) )
             ->method( 'clear' )
-            ->with( 'user', 'role', 'assignments', 'byGroup', 'inherited' )
+            ->with( 'spi', 'user', 'role', 'assignments', 'byGroup', 'inherited' )
             ->will( $this->returnValue( true ) );
 
         $handler = $this->persistenceHandler->userHandler();

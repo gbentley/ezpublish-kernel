@@ -32,7 +32,7 @@ class ContentTypeHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'contentTypeGroup', 55 )
+            ->with( 'spi', 'contentTypeGroup', 55 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $innerHandler = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Type\\Handler' );
@@ -70,7 +70,7 @@ class ContentTypeHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'contentTypeGroup', 55 )
+            ->with( 'spi', 'contentTypeGroup', 55 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $innerHandler = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Type\\Handler' );
@@ -107,7 +107,7 @@ class ContentTypeHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'clear' )
-            ->with( 'contentTypeGroup', 55 )
+            ->with( 'spi', 'contentTypeGroup', 55 )
             ->will( $this->returnValue( true ) );
 
         $innerHandler = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Type\\Handler' );
@@ -136,7 +136,7 @@ class ContentTypeHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'contentTypeGroup', 55 )
+            ->with( 'spi', 'contentTypeGroup', 55 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -180,7 +180,7 @@ class ContentTypeHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'contentTypeGroup', 55 )
+            ->with( 'spi', 'contentTypeGroup', 55 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -329,7 +329,7 @@ class ContentTypeHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'contentType', 55 )
+            ->with( 'spi', 'contentType', 55 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -379,7 +379,7 @@ class ContentTypeHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'contentType', 55 )
+            ->with( 'spi', 'contentType', 55 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -420,7 +420,7 @@ class ContentTypeHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'getItem' )
-            ->with( 'contentType', 'identifier', 'forum' )
+            ->with( 'spi', 'contentType', 'identifier', 'forum' )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -454,7 +454,7 @@ class ContentTypeHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'getItem' )
-            ->with( 'contentType', 55 )
+            ->with( 'spi', 'contentType', 55 )
             ->will( $this->returnValue( $cacheItemMock2 ) );
 
         $cacheItemMock2
@@ -484,7 +484,7 @@ class ContentTypeHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'getItem' )
-            ->with( 'contentType', 'identifier', 'forum' )
+            ->with( 'spi', 'contentType', 'identifier', 'forum' )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -510,7 +510,7 @@ class ContentTypeHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'getItem' )
-            ->with( 'contentType', 55 )
+            ->with( 'spi', 'contentType', 55 )
             ->will( $this->returnValue( $cacheItemMock2 ) );
 
         $cacheItemMock2
@@ -573,14 +573,14 @@ class ContentTypeHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'getItem' )
-            ->with( 'contentType', 55 )
+            ->with( 'spi', 'contentType', 55 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock2 = $this->getMock( 'Stash\\Item', array(), array(), '', false );
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'getItem' )
-            ->with( 'contentType', 'identifier', 'forum' )
+            ->with( 'spi', 'contentType', 'identifier', 'forum' )
             ->will( $this->returnValue( $cacheItemMock2 ) );
 
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Type\\Handler' );
@@ -665,13 +665,13 @@ class ContentTypeHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'getItem' )
-            ->with( 'contentType', 55 )
+            ->with( 'spi', 'contentType', 55 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'clear' )
-            ->with( 'contentType', 'identifier' )
+            ->with( 'spi', 'contentType', 'identifier' )
             ->will( $this->returnValue( true ) );
 
         $innerHandler = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Type\\Handler' );
@@ -709,7 +709,7 @@ class ContentTypeHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 2 ) )
             ->method( 'getItem' )
-            ->with( 'contentType', 'identifier', 'forum' )
+            ->with( 'spi', 'contentType', 'identifier', 'forum' )
             ->will( $this->returnValue( $cacheItemMock2 ) );
 
         $cacheItemMock2
@@ -770,13 +770,13 @@ class ContentTypeHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'clear' )
-            ->with( 'contentType', 44 )
+            ->with( 'spi', 'contentType', 44 )
             ->will( $this->returnValue( true ) );
 
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'clear' )
-            ->with( 'contentType', 'identifier' )
+            ->with( 'spi', 'contentType', 'identifier' )
             ->will( $this->returnValue( true ) );
 
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Type\\Handler' );
@@ -886,7 +886,7 @@ class ContentTypeHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'clear' )
-            ->with( 'contentType', 44 )
+            ->with( 'spi', 'contentType', 44 )
             ->will( $this->returnValue( true ) );
 
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Type\\Handler' );
@@ -944,7 +944,7 @@ class ContentTypeHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'clear' )
-            ->with( 'contentType', 44 )
+            ->with( 'spi', 'contentType', 44 )
             ->will( $this->returnValue( true ) );
 
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Type\\Handler' );
@@ -1028,7 +1028,7 @@ class ContentTypeHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'clear' )
-            ->with( 'contentType', 44 )
+            ->with( 'spi', 'contentType', 44 )
             ->will( $this->returnValue( true ) );
 
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Type\\Handler' );
@@ -1094,7 +1094,7 @@ class ContentTypeHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'clear' )
-            ->with( 'contentType', 44 )
+            ->with( 'spi', 'contentType', 44 )
             ->will( $this->returnValue( true ) );
 
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Type\\Handler' );
@@ -1160,7 +1160,7 @@ class ContentTypeHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'clear' )
-            ->with( 'contentType', 44 )
+            ->with( 'spi', 'contentType', 44 )
             ->will( $this->returnValue( true ) );
 
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Type\\Handler' );
@@ -1226,19 +1226,19 @@ class ContentTypeHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'clear' )
-            ->with( 'contentType', 44 )
+            ->with( 'spi', 'contentType', 44 )
             ->will( $this->returnValue( true ) );
 
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'clear' )
-            ->with( 'contentType', 'identifier' )
+            ->with( 'spi', 'contentType', 'identifier' )
             ->will( $this->returnValue( true ) );
 
         $this->cacheMock
             ->expects( $this->at( 2 ) )
             ->method( 'clear' )
-            ->with( 'content' )
+            ->with( 'spi', 'content' )
             ->will( $this->returnValue( true ) );
 
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Type\\Handler' );

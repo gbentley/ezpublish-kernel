@@ -90,7 +90,8 @@ class PersistenceCachePurgerTest extends PHPUnit_Framework_TestCase
     {
         $this->cacheService
             ->expects( $this->once() )
-            ->method( 'clear' );
+            ->method( 'clear' )
+            ->with( 'spi' );
 
         $this->cachePurger->all();
         $this->assertTrue( $this->cachePurger->isAllCleared() );
@@ -275,7 +276,7 @@ class PersistenceCachePurgerTest extends PHPUnit_Framework_TestCase
         $this->cacheService
             ->expects( $this->once() )
             ->method( 'clear' )
-            ->with( 'contentType' );
+            ->with( 'spi', 'contentType' );
 
         $this->cachePurger->contentType();
     }
@@ -288,7 +289,7 @@ class PersistenceCachePurgerTest extends PHPUnit_Framework_TestCase
         $this->cacheService
             ->expects( $this->once() )
             ->method( 'clear' )
-            ->with( 'contentType', 123 );
+            ->with( 'spi', 'contentType', 123 );
 
         $this->cachePurger->contentType( 123 );
     }
@@ -361,7 +362,7 @@ class PersistenceCachePurgerTest extends PHPUnit_Framework_TestCase
         $this->cacheService
             ->expects( $this->once() )
             ->method( 'clear' )
-            ->with( 'section' );
+            ->with( 'spi', 'section' );
 
         $this->cachePurger->section();
     }
@@ -374,7 +375,7 @@ class PersistenceCachePurgerTest extends PHPUnit_Framework_TestCase
         $this->cacheService
             ->expects( $this->once() )
             ->method( 'clear' )
-            ->with( 'section', 123 );
+            ->with( 'spi', 'section', 123 );
 
         $this->cachePurger->section( 123 );
     }
@@ -443,7 +444,7 @@ class PersistenceCachePurgerTest extends PHPUnit_Framework_TestCase
         $this->cacheService
             ->expects( $this->once() )
             ->method( 'clear' )
-            ->with( 'user' );
+            ->with( 'spi', 'user' );
 
         $this->cachePurger->user();
     }
@@ -456,7 +457,7 @@ class PersistenceCachePurgerTest extends PHPUnit_Framework_TestCase
         $this->cacheService
             ->expects( $this->once() )
             ->method( 'clear' )
-            ->with( 'user', 123 );
+            ->with( 'spi', 'user', 123 );
 
         $this->cachePurger->user( 123 );
     }

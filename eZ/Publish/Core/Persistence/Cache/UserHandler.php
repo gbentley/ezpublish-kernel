@@ -32,7 +32,7 @@ class UserHandler extends AbstractHandler implements UserHandlerInterface
         $return = $this->persistenceFactory->getUserHandler()->create( $user );
 
         // Clear corresponding content cache as creation of the User changes it's external data
-        $this->cache->clear( 'content', $user->id );
+        $this->cache->clear( 'spi', 'content', $user->id );
 
         return $return;
     }
@@ -73,7 +73,7 @@ class UserHandler extends AbstractHandler implements UserHandlerInterface
         $return = $this->persistenceFactory->getUserHandler()->update( $user );
 
         // Clear corresponding content cache as update of the User changes it's external data
-        $this->cache->clear( 'content', $user->id );
+        $this->cache->clear( 'spi', 'content', $user->id );
 
         return $return;
     }
@@ -87,9 +87,9 @@ class UserHandler extends AbstractHandler implements UserHandlerInterface
         $return = $this->persistenceFactory->getUserHandler()->delete( $userId );
 
         // user id == content id == group id
-        $this->cache->clear( 'content', $userId );
-        $this->cache->clear( 'user', 'role', 'assignments', 'byGroup', $userId );
-        $this->cache->clear( 'user', 'role', 'assignments', 'byGroup', 'inherited', $userId );
+        $this->cache->clear( 'spi', 'content', $userId );
+        $this->cache->clear( 'spi', 'user', 'role', 'assignments', 'byGroup', $userId );
+        $this->cache->clear( 'spi', 'user', 'role', 'assignments', 'byGroup', 'inherited', $userId );
 
         return $return;
     }
@@ -102,7 +102,7 @@ class UserHandler extends AbstractHandler implements UserHandlerInterface
         $this->logger->logCall( __METHOD__, array( 'struct' => $struct ) );
         $role = $this->persistenceFactory->getUserHandler()->createRole( $struct );
 
-        $this->cache->getItem( 'user', 'role', $role->id )->set( $role );
+        $this->cache->getItem( 'spi', 'user', 'role', $role->id )->set( $role );
 
         return $role;
     }
@@ -112,7 +112,7 @@ class UserHandler extends AbstractHandler implements UserHandlerInterface
      */
     public function loadRole( $roleId )
     {
-        $cache = $this->cache->getItem( 'user', 'role', $roleId );
+        $cache = $this->cache->getItem( 'spi', 'user', 'role', $roleId );
         $role = $cache->get();
         if ( $cache->isMiss() )
         {
@@ -157,7 +157,7 @@ class UserHandler extends AbstractHandler implements UserHandlerInterface
     public function loadRoleAssignmentsByGroupId( $groupId, $inherit = false )
     {
         $cacheKey = ( $inherit ? 'inherited/' : '' ) . $groupId;
-        $cache = $this->cache->getItem( 'user', 'role', 'assignments', 'byGroup', $cacheKey );
+        $cache = $this->cache->getItem( 'spi', 'user', 'role', 'assignments', 'byGroup', $cacheKey );
         $assignments = $cache->get();
         if ( $cache->isMiss() )
         {
@@ -180,7 +180,7 @@ class UserHandler extends AbstractHandler implements UserHandlerInterface
         $this->logger->logCall( __METHOD__, array( 'struct' => $struct ) );
         $this->persistenceFactory->getUserHandler()->updateRole( $struct );
 
-        $this->cache->clear( 'user', 'role', $struct->id );
+        $this->cache->clear( 'spi', 'user', 'role', $struct->id );
     }
 
     /**
@@ -191,8 +191,8 @@ class UserHandler extends AbstractHandler implements UserHandlerInterface
         $this->logger->logCall( __METHOD__, array( 'role' => $roleId ) );
         $return = $this->persistenceFactory->getUserHandler()->deleteRole( $roleId );
 
-        $this->cache->clear( 'user', 'role', $roleId );
-        $this->cache->clear( 'user', 'role', 'assignments' );
+        $this->cache->clear( 'spi', 'user', 'role', $roleId );
+        $this->cache->clear( 'spi', 'user', 'role', 'assignments' );
 
         return $return;
     }
@@ -205,7 +205,7 @@ class UserHandler extends AbstractHandler implements UserHandlerInterface
         $this->logger->logCall( __METHOD__, array( 'role' => $roleId, 'struct' => $policy ) );
         $return = $this->persistenceFactory->getUserHandler()->addPolicy( $roleId, $policy );
 
-        $this->cache->clear( 'user', 'role', $roleId );
+        $this->cache->clear( 'spi', 'user', 'role', $roleId );
 
         return $return;
     }
@@ -218,7 +218,7 @@ class UserHandler extends AbstractHandler implements UserHandlerInterface
         $this->logger->logCall( __METHOD__, array( 'struct' => $policy ) );
         $return = $this->persistenceFactory->getUserHandler()->updatePolicy( $policy );
 
-        $this->cache->clear( 'user', 'role', $policy->roleId );
+        $this->cache->clear( 'spi', 'user', 'role', $policy->roleId );
 
         return $return;
     }
@@ -231,7 +231,7 @@ class UserHandler extends AbstractHandler implements UserHandlerInterface
         $this->logger->logCall( __METHOD__, array( 'role' => $roleId, 'policy' => $policyId ) );
         $this->persistenceFactory->getUserHandler()->removePolicy( $roleId, $policyId );
 
-        $this->cache->clear( 'user', 'role', $roleId );
+        $this->cache->clear( 'spi', 'user', 'role', $roleId );
     }
 
     /**
@@ -251,9 +251,9 @@ class UserHandler extends AbstractHandler implements UserHandlerInterface
         $this->logger->logCall( __METHOD__, array( 'group' => $contentId, 'role' => $roleId, 'limitation' => $limitation ) );
         $return = $this->persistenceFactory->getUserHandler()->assignRole( $contentId, $roleId, $limitation );
 
-        $this->cache->clear( 'user', 'role', $roleId );
-        $this->cache->clear( 'user', 'role', 'assignments', 'byGroup', $contentId );
-        $this->cache->clear( 'user', 'role', 'assignments', 'byGroup', 'inherited' );
+        $this->cache->clear( 'spi', 'user', 'role', $roleId );
+        $this->cache->clear( 'spi', 'user', 'role', 'assignments', 'byGroup', $contentId );
+        $this->cache->clear( 'spi', 'user', 'role', 'assignments', 'byGroup', 'inherited' );
 
         return $return;
     }
@@ -266,9 +266,9 @@ class UserHandler extends AbstractHandler implements UserHandlerInterface
         $this->logger->logCall( __METHOD__, array( 'group' => $contentId, 'role' => $roleId ) );
         $return = $this->persistenceFactory->getUserHandler()->unAssignRole( $contentId, $roleId );
 
-        $this->cache->clear( 'user', 'role', $roleId );
-        $this->cache->clear( 'user', 'role', 'assignments', 'byGroup', $contentId );
-        $this->cache->clear( 'user', 'role', 'assignments', 'byGroup', 'inherited' );
+        $this->cache->clear( 'spi', 'user', 'role', $roleId );
+        $this->cache->clear( 'spi', 'user', 'role', 'assignments', 'byGroup', $contentId );
+        $this->cache->clear( 'spi', 'user', 'role', 'assignments', 'byGroup', 'inherited' );
 
         return $return;
     }

@@ -47,7 +47,7 @@ class UrlAliasHandler extends AbstractHandler implements UrlAliasHandlerInterfac
             )
         );
 
-        $this->cache->clear( 'urlAlias', 'location', $locationId  );
+        $this->cache->clear( 'spi', 'urlAlias', 'location', $locationId  );
 
         $this->persistenceFactory->getUrlAliasHandler()->publishUrlAliasForLocation(
             $locationId, $parentLocationId, $name, $languageCode, $alwaysAvailable, $updatePathIdentificationString
@@ -74,8 +74,8 @@ class UrlAliasHandler extends AbstractHandler implements UrlAliasHandlerInterfac
             $locationId, $path, $forwarding, $languageCode, $alwaysAvailable
         );
 
-        $this->cache->getItem( 'urlAlias', $urlAlias->id )->set( $urlAlias );
-        $this->cache->clear( 'urlAlias', 'location', $urlAlias->destination, 'custom' );
+        $this->cache->getItem( 'spi', 'urlAlias', $urlAlias->id )->set( $urlAlias );
+        $this->cache->clear( 'spi', 'urlAlias', 'location', $urlAlias->destination, 'custom' );
         return $urlAlias;
     }
 
@@ -99,7 +99,7 @@ class UrlAliasHandler extends AbstractHandler implements UrlAliasHandlerInterfac
             $resource, $path, $forwarding, $languageCode, $alwaysAvailable
         );
 
-        $this->cache->getItem( 'urlAlias', $urlAlias->id )->set( $urlAlias );
+        $this->cache->getItem( 'spi', 'urlAlias', $urlAlias->id )->set( $urlAlias );
         return $urlAlias;
     }
 
@@ -118,7 +118,7 @@ class UrlAliasHandler extends AbstractHandler implements UrlAliasHandlerInterfac
     public function listURLAliasesForLocation( $locationId, $custom = false )
     {
         // Look for location to list of url alias id's cache
-        $cache = $this->cache->getItem( 'urlAlias', 'location', $locationId . ( $custom ? '/custom' : '' ) );
+        $cache = $this->cache->getItem( 'spi', 'urlAlias', 'location', $locationId . ( $custom ? '/custom' : '' ) );
         $urlAliasIds = $cache->get();
         if ( $cache->isMiss() )
         {
@@ -150,12 +150,12 @@ class UrlAliasHandler extends AbstractHandler implements UrlAliasHandlerInterfac
         $this->logger->logCall( __METHOD__, array( 'aliases' => $urlAliases ) );
         $return = $this->persistenceFactory->getUrlAliasHandler()->removeURLAliases( $urlAliases );
 
-        $this->cache->clear( 'urlAlias', 'url' );//TIMBER! (no easy way to do reverse lookup of urls)
+        $this->cache->clear( 'spi', 'urlAlias', 'url' );//TIMBER! (no easy way to do reverse lookup of urls)
         foreach ( $urlAliases as $urlAlias )
         {
-            $this->cache->clear( 'urlAlias', $urlAlias->id );
+            $this->cache->clear( 'spi', 'urlAlias', $urlAlias->id );
             if ( $urlAlias->type === URLAlias::LOCATION )
-                $this->cache->clear( 'urlAlias', 'location', $urlAlias->destination );
+                $this->cache->clear( 'spi', 'urlAlias', 'location', $urlAlias->destination );
         }
 
         return $return;
@@ -167,7 +167,7 @@ class UrlAliasHandler extends AbstractHandler implements UrlAliasHandlerInterfac
     public function lookup( $url )
     {
         // Look for url to url alias id cache
-        $cache = $this->cache->getItem( 'urlAlias', 'url', $url );
+        $cache = $this->cache->getItem( 'spi', 'urlAlias', 'url', $url );
         $urlAliasId = $cache->get();
         if ( $cache->isMiss() )
         {
@@ -203,7 +203,7 @@ class UrlAliasHandler extends AbstractHandler implements UrlAliasHandlerInterfac
     public function loadUrlAlias( $id )
     {
         // Look for url alias cache
-        $cache = $this->cache->getItem( 'urlAlias', $id );
+        $cache = $this->cache->getItem( 'spi', 'urlAlias', $id );
         $urlAlias = $cache->get();
         if ( $cache->isMiss() )
         {
@@ -231,8 +231,8 @@ class UrlAliasHandler extends AbstractHandler implements UrlAliasHandlerInterfac
 
         $return = $this->persistenceFactory->getUrlAliasHandler()->locationMoved( $locationId, $oldParentId, $newParentId );
 
-        $this->cache->clear( 'urlAlias' );//TIMBER! (Will have to load url aliases for location to be able to clear specific entries)
-        //$this->cache->clear( 'urlAlias', 'location', $locationId );
+        $this->cache->clear( 'spi', 'urlAlias' );//TIMBER! (Will have to load url aliases for location to be able to clear specific entries)
+        //$this->cache->clear( 'spi', 'urlAlias', 'location', $locationId );
         return $return;
     }
 
@@ -261,7 +261,7 @@ class UrlAliasHandler extends AbstractHandler implements UrlAliasHandlerInterfac
         $this->logger->logCall( __METHOD__, array( 'location' => $locationId ) );
         $return = $this->persistenceFactory->getUrlAliasHandler()->locationDeleted( $locationId );
 
-        $this->cache->clear( 'urlAlias', 'location', $locationId );
+        $this->cache->clear( 'spi', 'urlAlias', 'location', $locationId );
         return $return;
     }
 }

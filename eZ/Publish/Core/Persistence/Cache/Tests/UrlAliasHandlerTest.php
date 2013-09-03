@@ -96,7 +96,7 @@ class UrlAliasHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'clear' )
-            ->with( 'urlAlias', 'location', 44 )
+            ->with( 'spi', 'urlAlias', 'location', 44 )
             ->will( $this->returnValue( null  ) );
 
         $handler = $this->persistenceHandler->urlAliasHandler();
@@ -126,7 +126,7 @@ class UrlAliasHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'getItem' )
-            ->with( 'urlAlias', 55 )
+            ->with( 'spi', 'urlAlias', 55 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -141,7 +141,7 @@ class UrlAliasHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'clear' )
-            ->with( 'urlAlias', 'location', 44, 'custom' )
+            ->with( 'spi', 'urlAlias', 'location', 44, 'custom' )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $handler = $this->persistenceHandler->urlAliasHandler();
@@ -171,7 +171,7 @@ class UrlAliasHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'urlAlias', 55 )
+            ->with( 'spi', 'urlAlias', 55 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -198,7 +198,7 @@ class UrlAliasHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'urlAlias', 'location', 44 )
+            ->with( 'spi', 'urlAlias', 'location', 44 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -251,7 +251,7 @@ class UrlAliasHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'urlAlias', 'location', '44/custom' )
+            ->with( 'spi', 'urlAlias', 'location', '44/custom' )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -304,7 +304,7 @@ class UrlAliasHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'getItem' )
-            ->with( 'urlAlias', 'location', 44 )
+            ->with( 'spi', 'urlAlias', 'location', 44 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -330,7 +330,7 @@ class UrlAliasHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'getItem' )
-            ->with( 'urlAlias', 55 )
+            ->with( 'spi', 'urlAlias', 55 )
             ->will( $this->returnValue( $cacheItemMock2 ) );
 
         $cacheItemMock2
@@ -341,7 +341,7 @@ class UrlAliasHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 2 ) )
             ->method( 'getItem' )
-            ->with( 'urlAlias', 58 )
+            ->with( 'spi', 'urlAlias', 58 )
             ->will( $this->returnValue( $cacheItemMock2 ) );
 
         $cacheItemMock2
@@ -352,7 +352,7 @@ class UrlAliasHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 3 ) )
             ->method( 'getItem' )
-            ->with( 'urlAlias', 91 )
+            ->with( 'spi', 'urlAlias', 91 )
             ->will( $this->returnValue( $cacheItemMock2 ) );
 
         $cacheItemMock2
@@ -384,7 +384,7 @@ class UrlAliasHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'getItem' )
-            ->with( 'urlAlias', 'location', '44/custom' )
+            ->with( 'spi', 'urlAlias', 'location', '44/custom' )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -410,7 +410,7 @@ class UrlAliasHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'getItem' )
-            ->with( 'urlAlias', 55 )
+            ->with( 'spi', 'urlAlias', 55 )
             ->will( $this->returnValue( $cacheItemMock2 ) );
 
         $cacheItemMock2
@@ -421,7 +421,7 @@ class UrlAliasHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 2 ) )
             ->method( 'getItem' )
-            ->with( 'urlAlias', 58 )
+            ->with( 'spi', 'urlAlias', 58 )
             ->will( $this->returnValue( $cacheItemMock2 ) );
 
         $cacheItemMock2
@@ -432,7 +432,7 @@ class UrlAliasHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 3 ) )
             ->method( 'getItem' )
-            ->with( 'urlAlias', 91 )
+            ->with( 'spi', 'urlAlias', 91 )
             ->will( $this->returnValue( $cacheItemMock2 ) );
 
         $cacheItemMock2
@@ -473,22 +473,22 @@ class UrlAliasHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'clear' )
-            ->with( 'urlAlias', 'url' );
+            ->with( 'spi', 'urlAlias', 'url' );
 
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'clear' )
-            ->with( 'urlAlias', 21 );
+            ->with( 'spi', 'urlAlias', 21 );
 
         $this->cacheMock
             ->expects( $this->at( 2 ) )
             ->method( 'clear' )
-            ->with( 'urlAlias', 32 );
+            ->with( 'spi', 'urlAlias', 32 );
 
         $this->cacheMock
             ->expects( $this->at( 3 ) )
             ->method( 'clear' )
-            ->with( 'urlAlias', 'location', 44 );
+            ->with( 'spi', 'urlAlias', 'location', 44 );
 
         $handler = $this->persistenceHandler->urlAliasHandler();
         $handler->removeURLAliases(
@@ -510,7 +510,7 @@ class UrlAliasHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'urlAlias', 'url', '/url' )
+            ->with( 'spi', 'urlAlias', 'url', '/url' )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -559,7 +559,7 @@ class UrlAliasHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'getItem' )
-            ->with( 'urlAlias', 'url', '/url' )
+            ->with( 'spi', 'urlAlias', 'url', '/url' )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -580,7 +580,7 @@ class UrlAliasHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'getItem' )
-            ->with( 'urlAlias', 55 )
+            ->with( 'spi', 'urlAlias', 55 )
             ->will( $this->returnValue( $cacheItemMock2 ) );
 
         $cacheItemMock2
@@ -612,7 +612,7 @@ class UrlAliasHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'urlAlias', 55 )
+            ->with( 'spi', 'urlAlias', 55 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -661,7 +661,7 @@ class UrlAliasHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'urlAlias', 55 )
+            ->with( 'spi', 'urlAlias', 55 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -703,7 +703,7 @@ class UrlAliasHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'clear' )
-            ->with( 'urlAlias' )
+            ->with( 'spi', 'urlAlias' )
             ->will( $this->returnValue( null  ) );
 
         $handler = $this->persistenceHandler->urlAliasHandler();
@@ -731,7 +731,7 @@ class UrlAliasHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'clear' )
-            ->with( 'urlAlias', 'location', 44 )
+            ->with( 'spi', 'urlAlias', 'location', 44 )
             ->will( $this->returnValue( null  ) );
 
         $handler = $this->persistenceHandler->urlAliasHandler();

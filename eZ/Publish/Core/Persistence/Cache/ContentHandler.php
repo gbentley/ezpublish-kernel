@@ -64,7 +64,7 @@ class ContentHandler extends AbstractHandler implements ContentHandlerInterface
             return $this->persistenceFactory->getContentHandler()->load( $contentId, $version, $translations );
         }
 
-        $cache = $this->cache->getItem( 'content', $contentId, $version );
+        $cache = $this->cache->getItem( 'spi', 'content', $contentId, $version );
         $content = $cache->get();
         if ( $cache->isMiss() )
         {
@@ -85,7 +85,7 @@ class ContentHandler extends AbstractHandler implements ContentHandlerInterface
      */
     public function loadContentInfo( $contentId )
     {
-        $cache = $this->cache->getItem( 'content', 'info', $contentId );
+        $cache = $this->cache->getItem( 'spi', 'content', 'info', $contentId );
         $contentInfo = $cache->get();
         if ( $cache->isMiss() )
         {
@@ -121,9 +121,9 @@ class ContentHandler extends AbstractHandler implements ContentHandlerInterface
         $this->logger->logCall( __METHOD__, array( 'content' => $contentId, 'status' => $status, 'version' => $version ) );
         $return = $this->persistenceFactory->getContentHandler()->setStatus( $contentId, $status, $version );
 
-        $this->cache->clear( 'content', $contentId, $version );
+        $this->cache->clear( 'spi', 'content', $contentId, $version );
         if ( $status === VersionInfo::STATUS_PUBLISHED )
-            $this->cache->clear( 'content', 'info', $contentId );
+            $this->cache->clear( 'spi', 'content', 'info', $contentId );
 
         return $return;
     }
@@ -136,7 +136,7 @@ class ContentHandler extends AbstractHandler implements ContentHandlerInterface
         $this->logger->logCall( __METHOD__, array( 'content' => $contentId, 'struct' => $struct ) );
 
         $this->cache
-            ->getItem( 'content', 'info', $contentId )
+            ->getItem( 'spi', 'content', 'info', $contentId )
             ->set( $contentInfo = $this->persistenceFactory->getContentHandler()->updateMetadata( $contentId, $struct ) );
 
         return $contentInfo;
@@ -150,7 +150,7 @@ class ContentHandler extends AbstractHandler implements ContentHandlerInterface
         $this->logger->logCall( __METHOD__, array( 'content' => $contentId, 'version' => $versionNo, 'struct' => $struct ) );
         $content = $this->persistenceFactory->getContentHandler()->updateContent( $contentId, $versionNo, $struct );
         $this->cache
-            ->getItem( 'content', $contentId, $versionNo )
+            ->getItem( 'spi', 'content', $contentId, $versionNo )
             ->set( $this->cloneAndSerializeXMLFields( $content ) );
         return $content;
     }
@@ -163,9 +163,9 @@ class ContentHandler extends AbstractHandler implements ContentHandlerInterface
         $this->logger->logCall( __METHOD__, array( 'content' => $contentId ) );
         $return = $this->persistenceFactory->getContentHandler()->deleteContent( $contentId );
 
-        $this->cache->clear( 'content', $contentId );
-        $this->cache->clear( 'content', 'info', $contentId );
-        $this->cache->clear( 'location', 'subtree' );
+        $this->cache->clear( 'spi', 'content', $contentId );
+        $this->cache->clear( 'spi', 'content', 'info', $contentId );
+        $this->cache->clear( 'spi', 'location', 'subtree' );
 
         return $return;
     }
@@ -178,9 +178,9 @@ class ContentHandler extends AbstractHandler implements ContentHandlerInterface
         $this->logger->logCall( __METHOD__, array( 'content' => $contentId, 'version' => $versionNo ) );
         $return = $this->persistenceFactory->getContentHandler()->deleteVersion( $contentId, $versionNo );
 
-        $this->cache->clear( 'content', $contentId, $versionNo );
-        $this->cache->clear( 'content', 'info', $contentId );
-        $this->cache->clear( 'location', 'subtree' );
+        $this->cache->clear( 'spi', 'content', $contentId, $versionNo );
+        $this->cache->clear( 'spi', 'content', 'info', $contentId );
+        $this->cache->clear( 'spi', 'location', 'subtree' );
 
         return $return;
     }
@@ -245,15 +245,15 @@ class ContentHandler extends AbstractHandler implements ContentHandlerInterface
         $this->logger->logCall( __METHOD__, array( 'content' => $contentId, 'version' => $versionNo, 'struct' => $struct ) );
         $content = $this->persistenceFactory->getContentHandler()->publish( $contentId, $versionNo, $struct );
 
-        $this->cache->clear( 'content', $contentId );
-        $this->cache->clear( 'location', 'subtree' );
+        $this->cache->clear( 'spi', 'content', $contentId );
+        $this->cache->clear( 'spi', 'location', 'subtree' );
 
         // warm up cache
         $contentInfo = $content->versionInfo->contentInfo;
         $this->cache
-            ->getItem( 'content', $contentInfo->id, $content->versionInfo->versionNo )
+            ->getItem( 'spi', 'content', $contentInfo->id, $content->versionInfo->versionNo )
             ->set( $this->cloneAndSerializeXMLFields( $content ) );
-        $this->cache->getItem( 'content', 'info', $contentInfo->id )->set( $contentInfo );
+        $this->cache->getItem( 'spi', 'content', 'info', $contentInfo->id )->set( $contentInfo );
 
         return $content;
     }

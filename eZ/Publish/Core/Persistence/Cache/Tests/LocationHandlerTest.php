@@ -28,7 +28,7 @@ class LocationHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'location', 33 )
+            ->with( 'spi', 'location', 33 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -72,7 +72,7 @@ class LocationHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'location', 33 )
+            ->with( 'spi', 'location', 33 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -107,7 +107,7 @@ class LocationHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'content', 'locations', 44 )
+            ->with( 'spi', 'content', 'locations', 44 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -156,7 +156,7 @@ class LocationHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'getItem' )
-            ->with( 'content', 'locations', 44 )
+            ->with( 'spi', 'content', 'locations', 44 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -178,7 +178,7 @@ class LocationHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'getItem' )
-            ->with( 'location', 33 )
+            ->with( 'spi', 'location', 33 )
             ->will( $this->returnValue( $cacheItemMock2 ) );
 
         $cacheItemMock2
@@ -209,7 +209,7 @@ class LocationHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'content', 'locations', "44/parentLocationsForDraftContent" )
+            ->with( 'spi', 'content', 'locations', "44/parentLocationsForDraftContent" )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -258,7 +258,7 @@ class LocationHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'getItem' )
-            ->with( 'content', 'locations', "44/parentLocationsForDraftContent" )
+            ->with( 'spi', 'content', 'locations', "44/parentLocationsForDraftContent" )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -280,7 +280,7 @@ class LocationHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'getItem' )
-            ->with( 'location', 33 )
+            ->with( 'spi', 'location', 33 )
             ->will( $this->returnValue( $cacheItemMock2 ) );
 
         $cacheItemMock2
@@ -311,7 +311,7 @@ class LocationHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'content', 'locations', '44/root/2' )
+            ->with( 'spi', 'content', 'locations', '44/root/2' )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -360,7 +360,7 @@ class LocationHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'getItem' )
-            ->with( 'content', 'locations', '44/root/2' )
+            ->with( 'spi', 'content', 'locations', '44/root/2' )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -382,7 +382,7 @@ class LocationHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'getItem' )
-            ->with( 'location', 33 )
+            ->with( 'spi', 'location', 33 )
             ->will( $this->returnValue( $cacheItemMock2 ) );
 
         $cacheItemMock2
@@ -464,7 +464,7 @@ class LocationHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'clear' )
-            ->with( 'location' )
+            ->with( 'spi', 'location' )
             ->will( $this->returnValue( true ) );
 
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Location\\Handler' );
@@ -517,7 +517,7 @@ class LocationHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'clear' )
-            ->with( 'location' )
+            ->with( 'spi', 'location' )
             ->will( $this->returnValue( true ) );
 
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Location\\Handler' );
@@ -545,7 +545,7 @@ class LocationHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'clear' )
-            ->with( 'location' )
+            ->with( 'spi', 'location' )
             ->will( $this->returnValue( true ) );
 
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Location\\Handler' );
@@ -573,25 +573,25 @@ class LocationHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'clear' )
-            ->with( 'location', 33 )
+            ->with( 'spi', 'location', 33 )
             ->will( $this->returnValue( true ) );
 
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'clear' )
-            ->with( 'location', 66 )
+            ->with( 'spi', 'location', 66 )
             ->will( $this->returnValue( true ) );
 
         $this->cacheMock
             ->expects( $this->at( 2 ) )
             ->method( 'clear' )
-            ->with( 'location', 'subtree' )
+            ->with( 'spi', 'location', 'subtree' )
             ->will( $this->returnValue( true ) );
 
         $this->cacheMock
             ->expects( $this->at( 3 ) )
             ->method( 'clear' )
-            ->with( 'content', 'locations' )
+            ->with( 'spi', 'content', 'locations' )
             ->will( $this->returnValue( true ) );
 
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Location\\Handler' );
@@ -620,12 +620,12 @@ class LocationHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'clear' )
-            ->with( 'location', 33 );
+            ->with( 'spi', 'location', 33 );
 
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'clear' )
-            ->with( 'location', 'subtree' );
+            ->with( 'spi', 'location', 'subtree' );
 
         $innerHandler = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Location\\Handler' );
         $this->persistenceFactoryMock
@@ -657,7 +657,7 @@ class LocationHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'location', 33 )
+            ->with( 'spi', 'location', 33 )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Location\\Handler' );
@@ -684,13 +684,13 @@ class LocationHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'clear' )
-            ->with( 'location', 'subtree' )
+            ->with( 'spi', 'location', 'subtree' )
             ->will( $this->returnValue( true ) );
 
         $this->cacheMock
             ->expects( $this->at( 2 ) )
             ->method( 'clear' )
-            ->with( 'content', 'locations', 2 )
+            ->with( 'spi', 'content', 'locations', 2 )
             ->will( $this->returnValue( true ) );
 
         $handler = $this->persistenceHandler->locationHandler();
@@ -706,13 +706,13 @@ class LocationHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'clear' )
-            ->with( 'location' )
+            ->with( 'spi', 'location' )
             ->will( $this->returnValue( true ) );
 
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'clear' )
-            ->with( 'content' )
+            ->with( 'spi', 'content' )
             ->will( $this->returnValue( true ) );
 
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Location\\Handler' );
@@ -740,7 +740,7 @@ class LocationHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'clear' )
-            ->with( 'content' );
+            ->with( 'spi', 'content' );
 
         $innerHandler = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Location\\Handler' );
         $this->persistenceFactoryMock
@@ -768,13 +768,13 @@ class LocationHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'clear' )
-            ->with( 'content', 30 )
+            ->with( 'spi', 'content', 30 )
             ->will( $this->returnValue( true ) );
 
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'clear' )
-            ->with( 'content', 'info', 30 )
+            ->with( 'spi', 'content', 'info', 30 )
             ->will( $this->returnValue( true ) );
 
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Location\\Handler' );

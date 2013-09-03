@@ -34,7 +34,7 @@ class ContentTypeHandler extends AbstractHandler implements ContentTypeHandlerIn
         $this->logger->logCall( __METHOD__, array( 'struct' => $struct ) );
         $group = $this->persistenceFactory->getContentTypeHandler()->createGroup( $struct );
 
-        $this->cache->getItem( 'contentTypeGroup', $group->id )->set( $group );
+        $this->cache->getItem( 'spi', 'contentTypeGroup', $group->id )->set( $group );
 
         return $group;
     }
@@ -47,7 +47,7 @@ class ContentTypeHandler extends AbstractHandler implements ContentTypeHandlerIn
         $this->logger->logCall( __METHOD__, array( 'struct' => $struct ) );
 
         $this->cache
-            ->getItem( 'contentTypeGroup', $struct->id )
+            ->getItem( 'spi', 'contentTypeGroup', $struct->id )
             ->set( $group = $this->persistenceFactory->getContentTypeHandler()->updateGroup( $struct ) );
 
         return $group;
@@ -61,7 +61,7 @@ class ContentTypeHandler extends AbstractHandler implements ContentTypeHandlerIn
         $this->logger->logCall( __METHOD__, array( 'group' => $groupId ) );
         $return = $this->persistenceFactory->getContentTypeHandler()->deleteGroup( $groupId );
 
-        $this->cache->clear( 'contentTypeGroup', $groupId );
+        $this->cache->clear( 'spi', 'contentTypeGroup', $groupId );
         return $return;
     }
 
@@ -70,7 +70,7 @@ class ContentTypeHandler extends AbstractHandler implements ContentTypeHandlerIn
      */
     public function loadGroup( $groupId )
     {
-        $cache = $this->cache->getItem( 'contentTypeGroup', $groupId );
+        $cache = $this->cache->getItem( 'spi', 'contentTypeGroup', $groupId );
         $group = $cache->get();
         if ( $cache->isMiss() )
         {
@@ -120,7 +120,7 @@ class ContentTypeHandler extends AbstractHandler implements ContentTypeHandlerIn
         }
 
         // Get cache for published content types
-        $cache = $this->cache->getItem( 'contentType', $typeId );
+        $cache = $this->cache->getItem( 'spi', 'contentType', $typeId );
         $type = $cache->get();
         if ( $cache->isMiss() )
         {
@@ -137,7 +137,7 @@ class ContentTypeHandler extends AbstractHandler implements ContentTypeHandlerIn
     public function loadByIdentifier( $identifier )
     {
         // Get identifier to id cache if there is one (avoids caching an object several times)
-        $cache = $this->cache->getItem( 'contentType', 'identifier', $identifier );
+        $cache = $this->cache->getItem( 'spi', 'contentType', 'identifier', $identifier );
         $typeId = $cache->get();
         if ( $cache->isMiss() )
         {
@@ -145,7 +145,7 @@ class ContentTypeHandler extends AbstractHandler implements ContentTypeHandlerIn
             $type = $this->persistenceFactory->getContentTypeHandler()->loadByIdentifier( $identifier );
             $cache->set( $type->id );
             // Warm contentType cache in case it's not set
-            $this->cache->getItem( 'contentType', $type->id )->set( $type );
+            $this->cache->getItem( 'spi', 'contentType', $type->id )->set( $type );
         }
         else
         {
@@ -176,8 +176,8 @@ class ContentTypeHandler extends AbstractHandler implements ContentTypeHandlerIn
         if ( $type->status === Type::STATUS_DEFINED )
         {
             // Warm cache
-            $this->cache->getItem( 'contentType', $type->id )->set( $type );
-            $this->cache->getItem( 'contentType', 'identifier', $type->identifier )->set( $type->id );
+            $this->cache->getItem( 'spi', 'contentType', $type->id )->set( $type );
+            $this->cache->getItem( 'spi', 'contentType', 'identifier', $type->identifier )->set( $type->id );
         }
 
         return $type;
@@ -196,12 +196,12 @@ class ContentTypeHandler extends AbstractHandler implements ContentTypeHandlerIn
 
         // Warm cache
         $this->cache
-            ->getItem( 'contentType', $typeId )
+            ->getItem( 'spi', 'contentType', $typeId )
             ->set( $type = $this->persistenceFactory->getContentTypeHandler()->update( $typeId, $status, $struct ) );
 
         // Clear identifier cache in case it was changed before warming the new one
-        $this->cache->clear( 'contentType', 'identifier' );
-        $this->cache->getItem( 'contentType', 'identifier', $type->identifier )->set( $typeId );
+        $this->cache->clear( 'spi', 'contentType', 'identifier' );
+        $this->cache->getItem( 'spi', 'contentType', 'identifier', $type->identifier )->set( $typeId );
 
         return $type;
     }
@@ -217,8 +217,8 @@ class ContentTypeHandler extends AbstractHandler implements ContentTypeHandlerIn
         if ( $status === Type::STATUS_DEFINED )
         {
             // Clear type cache and all identifier cache (as we don't know the identifier)
-            $this->cache->clear( 'contentType', $typeId );
-            $this->cache->clear( 'contentType', 'identifier' );
+            $this->cache->clear( 'spi', 'contentType', $typeId );
+            $this->cache->clear( 'spi', 'contentType', 'identifier' );
         }
 
         return $return;
@@ -251,7 +251,7 @@ class ContentTypeHandler extends AbstractHandler implements ContentTypeHandlerIn
         $return = $this->persistenceFactory->getContentTypeHandler()->unlink( $groupId, $typeId, $status );
 
         if ( $status === Type::STATUS_DEFINED )
-            $this->cache->clear( 'contentType', $typeId );
+            $this->cache->clear( 'spi', 'contentType', $typeId );
 
         return $return;
     }
@@ -265,7 +265,7 @@ class ContentTypeHandler extends AbstractHandler implements ContentTypeHandlerIn
         $return = $this->persistenceFactory->getContentTypeHandler()->link( $groupId, $typeId, $status );
 
         if ( $status === Type::STATUS_DEFINED )
-            $this->cache->clear( 'contentType', $typeId );
+            $this->cache->clear( 'spi', 'contentType', $typeId );
 
         return $return;
     }
@@ -301,7 +301,7 @@ class ContentTypeHandler extends AbstractHandler implements ContentTypeHandlerIn
         );
 
         if ( $status === Type::STATUS_DEFINED )
-            $this->cache->clear( 'contentType', $typeId );
+            $this->cache->clear( 'spi', 'contentType', $typeId );
 
         return $return;
     }
@@ -319,7 +319,7 @@ class ContentTypeHandler extends AbstractHandler implements ContentTypeHandlerIn
         );
 
         if ( $status === Type::STATUS_DEFINED )
-            $this->cache->clear( 'contentType', $typeId );
+            $this->cache->clear( 'spi', 'contentType', $typeId );
     }
 
     /**
@@ -335,7 +335,7 @@ class ContentTypeHandler extends AbstractHandler implements ContentTypeHandlerIn
         );
 
         if ( $status === Type::STATUS_DEFINED )
-            $this->cache->clear( 'contentType', $typeId );
+            $this->cache->clear( 'spi', 'contentType', $typeId );
     }
 
     /**
@@ -347,10 +347,10 @@ class ContentTypeHandler extends AbstractHandler implements ContentTypeHandlerIn
         $this->persistenceFactory->getContentTypeHandler()->publish( $typeId );
 
         // Clear type cache and all identifier cache (as we don't know the identifier)
-        $this->cache->clear( 'contentType', $typeId );
-        $this->cache->clear( 'contentType', 'identifier' );
+        $this->cache->clear( 'spi', 'contentType', $typeId );
+        $this->cache->clear( 'spi', 'contentType', 'identifier' );
 
         // clear content cache
-        $this->cache->clear( 'content' );//TIMBER! (possible content changes)
+        $this->cache->clear( 'spi', 'content' );//TIMBER! (possible content changes)
     }
 }

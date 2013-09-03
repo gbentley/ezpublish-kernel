@@ -26,7 +26,7 @@ class SectionHandler extends AbstractHandler implements SectionHandlerInterface
     {
         $this->logger->logCall( __METHOD__, array( 'name' => $name, 'identifier' => $identifier ) );
         $section = $this->persistenceFactory->getSectionHandler()->create( $name, $identifier );
-        $this->cache->getItem( 'section', $section->id )->set( $section );
+        $this->cache->getItem( 'spi', 'section', $section->id )->set( $section );
         return $section;
     }
 
@@ -37,7 +37,7 @@ class SectionHandler extends AbstractHandler implements SectionHandlerInterface
     {
         $this->logger->logCall( __METHOD__, array( 'section' => $id, 'name' => $name, 'identifier' => $identifier ) );
         $this->cache
-            ->getItem( 'section', $id )
+            ->getItem( 'spi', 'section', $id )
             ->set( $section = $this->persistenceFactory->getSectionHandler()->update( $id, $name, $identifier ) );
         return $section;
     }
@@ -47,7 +47,7 @@ class SectionHandler extends AbstractHandler implements SectionHandlerInterface
      */
     public function load( $id )
     {
-        $cache = $this->cache->getItem( 'section', $id );
+        $cache = $this->cache->getItem( 'spi', 'section', $id );
         $section = $cache->get();
         if ( $cache->isMiss() )
         {
@@ -92,7 +92,7 @@ class SectionHandler extends AbstractHandler implements SectionHandlerInterface
         $this->logger->logCall( __METHOD__, array( 'section' => $id ) );
         $return = $this->persistenceFactory->getSectionHandler()->delete( $id );
 
-        $this->cache->clear( 'section', $id );
+        $this->cache->clear( 'spi', 'section', $id );
         return $return;
     }
 
@@ -104,8 +104,8 @@ class SectionHandler extends AbstractHandler implements SectionHandlerInterface
         $this->logger->logCall( __METHOD__, array( 'section' => $sectionId, 'content' => $contentId ) );
         $return = $this->persistenceFactory->getSectionHandler()->assign( $sectionId, $contentId );
 
-        $this->cache->clear( 'content', $contentId );
-        $this->cache->clear( 'content', 'info', $contentId );
+        $this->cache->clear( 'spi', 'content', $contentId );
+        $this->cache->clear( 'spi', 'content', 'info', $contentId );
 
         return $return;
     }
